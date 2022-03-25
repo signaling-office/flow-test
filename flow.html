@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- cdn読み込み -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/draw2d@1.0.38/dist/draw2d.js"></script>
-    <script type="text/javascript">
-        let canvas = null;
-        document.addEventListener("DOMContentLoaded", function () {
-            canvas = new draw2d.Canvas("canvas_id");
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- cdn読み込み -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/draw2d@1.0.38/dist/draw2d.js"></script>
+	<script type="text/javascript">
+		let canvas = null;
+		document.addEventListener("DOMContentLoaded", function () {
+			canvas = new draw2d.Canvas("canvas_id");
 
-            //ドラッグ&ドロップで connectionを作成できるようにする
-            canvas.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
-                createConnection: function () {
-                    return new draw2d.Connection({
-                        //connectionの形状の設定
-                        router: new draw2d.layout.connection.InteractiveManhattanConnectionRouter()
-                    })
-                }
-            }));
-        });
-        function canvas_redo() {
-            canvas.getCommandStack().redo();
-        }
-        function canvas_undo() {
-            canvas.getCommandStack().undo();
-        }
-        function figure_delete() {
-            canvas.getCommandStack().execute(
-                new draw2d.command.CommandDelete(canvas.getPrimarySelection()));
-        }
-        function label_add() {
-            let label = new draw2d.shape.basic.Label({ text: "テキスト" });
-            label.createPort("input");
-            label.createPort("output");
-            canvas.getCommandStack().execute(new draw2d.command.CommandAdd(canvas, label, 10, 10));
-        }
-    </script>
+			//ドラッグ&ドロップで connectionを作成できるようにする
+			canvas.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
+				createConnection: function () {
+					return new draw2d.Connection({
+						//connectionの形状の設定
+						router: new draw2d.layout.connection.InteractiveManhattanConnectionRouter()
+					})
+				}
+			}));
+		});
+		function canvas_redo() {
+			canvas.getCommandStack().redo();
+		}
+		function canvas_undo() {
+			canvas.getCommandStack().undo();
+		}
+		function figure_delete() {
+			canvas.getCommandStack().execute(new draw2d.command.CommandDelete(canvas.getPrimarySelection()));
+		}
+		function label_add() {
+			let label = new draw2d.shape.basic.Label({ text: "テキスト" });
+			label.createPort("input");
+			label.createPort("output");
+			canvas.getCommandStack().execute(new draw2d.command.CommandAdd(canvas, label, 10, 10));
+		}
+	</script>
 </head>
 
 <body id="container">
-    <div style="margin: 5px;">
-        <input type="button" value="←" onclick="canvas_undo()">
-        <input type="button" value="→" onclick="canvas_redo()">
-        <input type="button" value="🗑️delete" onclick="figure_delete()">
-        <input type="button" value="➕add" onclick="label_add()">
-    </div>
-    <div id="canvas_id" style="width:3000px; height:3000px;background-color: rgb(220, 220, 220);"></div>
+	<div style="margin: 5px;">
+		<input type="button" value="←" onclick="canvas_undo()">
+		<input type="button" value="→" onclick="canvas_redo()">
+		<input type="button" value="🗑️delete" onclick="figure_delete()">
+		<input type="button" value="➕add" onclick="label_add()">
+		<select>
+			<option>あ</option>
+			<option>い</option>
+			<option>う</option>
+			<option>え</option>
+			<option>お</option>
+			<option>か</option>
+			<option>き</option>
+			<option>く</option>
+			<option>け</option>
+			<option>こ</option>
+		</select>
+</div>
+	<div id="canvas_id" style="width:3000px; height:3000px;background-color: rgb(220, 220, 220);"></div>
 </body>
 
 </html>
