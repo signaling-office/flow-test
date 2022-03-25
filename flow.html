@@ -30,12 +30,15 @@
 		function figure_delete() {
 			canvas.getCommandStack().execute(new draw2d.command.CommandDelete(canvas.getPrimarySelection()));
 		}
+		document.getElementById('u0521cwj').onchange = function(){
+		  alert(this.value);
+		}
 		function label_add() {
 			let label = new draw2d.shape.basic.Label({ text: "テキスト" });
 			label.createPort("input");
 			label.createPort("output");
 			canvas.getCommandStack().execute(new draw2d.command.CommandAdd(canvas, label, 10, 10));
-		}
+		}		
 	</script>
 </head>
 
